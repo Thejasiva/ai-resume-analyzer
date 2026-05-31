@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            ResumeAI
+        </div>
+
+        <div class="nav-right">
+            <button id="themeBtn" aria-label="Toggle Theme">
+                🌙
+            </button>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Upload Section -->
+
+        <section class="upload-card">
+
+            <h2>Upload Resume</h2>
+
+            <div class="drop-zone">
+
+                <input
+                    type="file"
+                    id="resumeFile"
+                    accept=".pdf"
+                    hidden>
+
+                <p>
+                    Drag & Drop Resume PDF Here
+                </p>
+
+                <button id="browseBtn">
+                    Choose File
+                </button>
+
+            </div>
+
+
+            <section class="job-description">
+
+                <h2>Job Description</h2>
+
+                <textarea
+                    id="jobDescription"
+                    rows="10"
+                    placeholder="Paste the job description here...">
+                </textarea>
+
+            </section>
+
+
+            <button class="analyze-btn">
+                Analyze Resume
+            </button>
+
+            <div id="loader" class="loader hidden">
+                Analyzing Resume...
+            </div>
+
+        </section>
+
+
+
+        <!-- Resume Text -->
+
+        <section class="resume-preview">
+
+            <h2>Extracted Resume Text</h2>
+
+            <textarea
+                id="resumeText"
+                rows="15"
+                readonly>
+            </textarea>
+
+        </section>
+
+        <!-- Results -->
+
+        <section class="results">
+
+            <!-- ATS Score -->
+
+            <div class="ats-card">
+
+                <div class="progress-circle">
+
+                    <svg width="180" height="180">
+
+                        <circle
+                            class="bg"
+                            cx="90"
+                            cy="90"
+                            r="70">
+                        </circle>
+
+                        <circle
+                            class="progress"
+                            cx="90"
+                            cy="90"
+                            r="70">
+                        </circle>
+
+                    </svg>
+
+                    <div
+                        class="score"
+                        id="atsScore">
+                        0%
+                    </div>
+
+                </div>
+
+                <h3>ATS Score</h3>
+
+            </div>
+
+
+            <div class="ats-card">
+
+                <h3>Job Match</h3>
+
+                <div
+                    id="jobMatchScore"
+                    style="
+                        font-size:3rem;
+                        text-align:center;
+                        margin-top:30px;">
+                    0%
+                </div>
+
+            </div>
+
+
+            <!-- Analysis -->
+
+            <div class="analysis-card">
+
+                <h2>Analysis Results</h2>
+
+                <ul id="analysisList">
+
+                    <li>
+                        Upload and analyze a resume to see results.
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+        <!-- Keywords -->
+
+        <section class="keywords">
+
+            <h2>Missing Keywords</h2>
+
+            <div
+                class="tags"
+                id="missingKeywords">
+
+                <span>
+                    No analysis yet
+                </span>
+
+            </div>
+
+        </section>
+
+        <!--Matching skills-->
+
+        <section class="keywords">
+
+            <h2>Matching Skills</h2>
+
+                <div
+                    class="tags"
+                    id="matchingKeywords">
+
+                    <span>
+                        No analysis yet
+                    </span>
+
+                </div>
+
+        </section>
+
+
+        <!--Strengths and Weaknesses-->
+
+        <section class="results">
+
+            <div class="analysis-card">
+
+                <h2>Strengths</h2>
+
+                <ul id="strengthsList">
+                    <li>No analysis yet</li>
+                </ul>
+
+            </div>
+
+            <div class="analysis-card">
+
+                <h2>Weaknesses</h2>
+
+                <ul id="weaknessesList">
+                    <li>No analysis yet</li>
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- Suggestions -->
+
+        <section class="suggestions">
+
+            <h2>AI Suggestions</h2>
+
+            <ul id="suggestionsList">
+
+                <li>
+                    Upload a resume to receive suggestions.
+                </li>
+
+            </ul>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
